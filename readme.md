@@ -1,6 +1,6 @@
 
 
-# Best Buy Cloud-Native Application
+# Cloud-Native Microservices Platform
 
 
 ##  Demo Video
