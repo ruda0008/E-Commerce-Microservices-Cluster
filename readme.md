@@ -2,11 +2,40 @@
 
 # Cloud-Native Microservices Platform
 
+## Update (Dec 2025): The CI/CD pipeline has been upgraded to a "Golden Level" `DevSecOps` workflow.
+
+- Moving beyond standard automation, this project now implements a "Broken Build Policy" for security. The pipeline automatically blocks any deployment that does not pass strict compliance checks, ensuring Defense in Depth for both the application code and the infrastructure.
+
+- Gate,Tool,Type,Purpose
+Gate 1,SonarCloud : SAST (Static Analysis),"Scans source code for bugs, vulnerabilities, before compilation."
+Gate 2, Trivy : Container Security,Scans the Docker Image for OS-level vulnerabilities (CVEs) and insecure dependencies
+
+- How it Works
+1. Code Commit: Developer pushes code to main.
+
+2. SonarCloud Scan: Checks for logic errors and hardcoded secrets.
+
+-  If failed: `Pipeline stops` immediately.
+
+3. Docker Build: Image is built locally.
+
+4. Trivy Scan: The image is tested against the database of known CVEs.
+
+- Scenario: If the base image is golang:1.22.5 (which has known flaws), Trivy detects CVE-2024-45337.
+
+- Action: The pipeline FAILS. Deployment is blocked.
+
+5. Deployment: Only occurs if both gates return a "Clean" status.
+
+<img width="1024" height="376" alt="Screenshot 2025-12-27 at 5 22 06 PM" src="https://github.com/user-attachments/assets/7dd85d6b-38a0-4a87-8e3a-21004235b783" />
+
 
 ##  Demo Video
 
-**[Watch the Full Demo on YouTube](https://youtu.be/iKE3WCEGcmk)**
+**Watch the Full Demo on YouTube**
+- `original`]: https://youtu.be/iKE3WCEGcmk
 
+- `Updated` SonarQube and Trivy Security Checks : https://youtu.be/OGejAhiil9Q
 
 
 
